@@ -1,0 +1,687 @@
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> alter table student add unique(lname);
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 1
+
+mysql> select * from student;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | address1   | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table student change address1 adress varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> create table new_student1 like student;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> inset into new_student1 select * from student;
+ERROR 1064 (42000): Erreur de syntaxe près de 'inset into new_student1 select * from student' à la ligne 1
+mysql> insert into new_student1 select * from student;
+Query OK, 10 rows affected (0.02 sec)
+Enregistrements: 10  Doublons: 0  Avertissements: 0
+
+mysql> select * from news_student1;
+ERROR 1146 (42S02): La table 'university.news_student1' n'existe pas
+mysql> select * from new_student1;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | adress     | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> truncate new_student1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> drop table new_student1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> update building set name="mainbuilding where building_id=1;
+    ">
+    ">
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> alter table student add unique(lname);
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 1
+
+mysql> select * from student;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | address1   | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table student change address1 adress varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> create table new_student1 like student;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> inset into new_student1 select * from student;
+ERROR 1064 (42000): Erreur de syntaxe près de 'inset into new_student1 select * from student' à la ligne 1
+mysql> insert into new_student1 select * from student;
+Query OK, 10 rows affected (0.02 sec)
+Enregistrements: 10  Doublons: 0  Avertissements: 0
+
+mysql> select * from news_student1;
+ERROR 1146 (42S02): La table 'university.news_student1' n'existe pas
+mysql> select * from new_student1;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | adress     | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> truncate new_student1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> drop table new_student1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> update building set name="mainbuilding where building_id=1;
+    ">
+    ">Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> alter table student add unique(lname);
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 1
+
+mysql> select * from student;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | address1   | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table student change address1 adress varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> create table new_student1 like student;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> inset into new_student1 select * from student;
+ERROR 1064 (42000): Erreur de syntaxe près de 'inset into new_student1 select * from student' à la ligne 1
+mysql> insert into new_student1 select * from student;
+Query OK, 10 rows affected (0.02 sec)
+Enregistrements: 10  Doublons: 0  Avertissements: 0
+
+mysql> select * from news_student1;
+ERROR 1146 (42S02): La table 'university.news_student1' n'existe pas
+mysql> select * from new_student1;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | adress     | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> truncate new_student1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> drop table new_student1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> update building set name="mainbuilding where building_id=1;
+    ">
+    ">Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> alter table student add unique(lname);
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 1
+
+mysql> select * from student;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | address1   | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table student change address1 adress varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> create table new_student1 like student;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> inset into new_student1 select * from student;
+ERROR 1064 (42000): Erreur de syntaxe près de 'inset into new_student1 select * from student' à la ligne 1
+mysql> insert into new_student1 select * from student;
+Query OK, 10 rows affected (0.02 sec)
+Enregistrements: 10  Doublons: 0  Avertissements: 0
+
+mysql> select * from news_student1;
+ERROR 1146 (42S02): La table 'university.news_student1' n'existe pas
+mysql> select * from new_student1;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | adress     | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> truncate new_student1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> drop table new_student1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> update building set name="mainbuilding where building_id=1;
+    ">
+    ">Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> alter table student add unique(lname);
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 1
+
+mysql> select * from student;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | address1   | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table student change address1 adress varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> create table new_student1 like student;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> inset into new_student1 select * from student;
+ERROR 1064 (42000): Erreur de syntaxe près de 'inset into new_student1 select * from student' à la ligne 1
+mysql> insert into new_student1 select * from student;
+Query OK, 10 rows affected (0.02 sec)
+Enregistrements: 10  Doublons: 0  Avertissements: 0
+
+mysql> select * from news_student1;
+ERROR 1146 (42S02): La table 'university.news_student1' n'existe pas
+mysql> select * from new_student1;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | adress     | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> truncate new_student1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> drop table new_student1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> update building set name="mainbuilding where building_id=1;
+    ">
+    ">Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> alter table student add unique(lname);
+Query OK, 0 rows affected, 1 warning (0.17 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 1
+
+mysql> select * from student;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | address1   | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table student change address1 adress varchar(30);
+Query OK, 0 rows affected (0.04 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> create table new_student1 like student;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> inset into new_student1 select * from student;
+ERROR 1064 (42000): Erreur de syntaxe près de 'inset into new_student1 select * from student' à la ligne 1
+mysql> insert into new_student1 select * from student;
+Query OK, 10 rows affected (0.02 sec)
+Enregistrements: 10  Doublons: 0  Avertissements: 0
+
+mysql> select * from news_student1;
+ERROR 1146 (42S02): La table 'university.news_student1' n'existe pas
+mysql> select * from new_student1;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | adress     | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql> truncate new_student1;
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> drop table new_student1;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> update building set name="mainbuilding where building_id=1;
+    ">
+    ">Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> update building set name="main building"where builing_id=1;
+ERROR 1054 (42S22): Champ 'builing_id' inconnu dans where clause
+mysql> update building set name="main building"where building_id=1;
+Query OK, 0 rows affected (0.05 sec)
+Enregistrements correspondants: 1  Modifi+rs: 0  Warnings: 0
+
+mysql> delete gfrom mark where (total/3)<70;
+ERROR 1064 (42000): Erreur de syntaxe près de 'mark where (total/3)<70' à la ligne 1
+mysql> delete from mark where (total/3)<70;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select name from teaCHER WHERE SAL>30000;
+Empty set (0.04 sec)
+
+mysql> select name from teaCHER WHERE SAL>3000;
++--------+
+| name   |
++--------+
+| rekha  |
+| reshmi |
+| tinu   |
+| anu    |
++--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT count(dept_id) from building;
+ERROR 1054 (42S22): Champ 'dept_id' inconnu dans field list
+mysql> SELECT count(deptid) from building;
++---------------+
+| count(deptid) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from mark where (total* 100/300)>80;
++----------+
+| count(*) |
++----------+
+|        8 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from teacher where name like "a%";
++------+------+--------+-------+-------------+----------+
+| id   | name | deptid | sal   | designation | qualific |
++------+------+--------+-------+-------------+----------+
+|  447 | anu  |      4 | 15000 | HOD         | msc      |
++------+------+--------+-------+-------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where date_of_birth between "1-1-2000"and "1-1-2005";
+Empty set, 2 warnings (0.01 sec)
+
+mysql> select * from building where building_id=1 or building_id=4;
++-------------+---------------+-------+--------+
+| building_id | name          | floor | deptid |
++-------------+---------------+-------+--------+
+|           1 | main building |     2 |      1 |
+|           4 | building4     |     2 |      4 |
++-------------+---------------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql>==============================================================
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 3
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> update building set name="main building"where builing_id=1;
+ERROR 1054 (42S22): Champ 'builing_id' inconnu dans where clause
+mysql> update building set name="main building"where building_id=1;
+Query OK, 0 rows affected (0.05 sec)
+Enregistrements correspondants: 1  Modifi+rs: 0  Warnings: 0
+
+mysql> delete gfrom mark where (total/3)<70;
+ERROR 1064 (42000): Erreur de syntaxe près de 'mark where (total/3)<70' à la ligne 1
+mysql> delete from mark where (total/3)<70;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select name from teaCHER WHERE SAL>30000;
+Empty set (0.04 sec)
+
+mysql> select name from teaCHER WHERE SAL>3000;
++--------+
+| name   |
++--------+
+| rekha  |
+| reshmi |
+| tinu   |
+| anu    |
++--------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT count(dept_id) from building;
+ERROR 1054 (42S22): Champ 'dept_id' inconnu dans field list
+mysql> SELECT count(deptid) from building;
++---------------+
+| count(deptid) |
++---------------+
+|             4 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from mark where (total* 100/300)>80;
++----------+
+| count(*) |
++----------+
+|        8 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from teacher where name like "a%";
++------+------+--------+-------+-------------+----------+
+| id   | name | deptid | sal   | designation | qualific |
++------+------+--------+-------+-------------+----------+
+|  447 | anu  |      4 | 15000 | HOD         | msc      |
++------+------+--------+-------+-------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from student where date_of_birth between "1-1-2000"and "1-1-2005";
+Empty set, 2 warnings (0.01 sec)
+
+mysql> select * from building where building_id=1 or building_id=4;
++-------------+---------------+-------+--------+
+| building_id | name          | floor | deptid |
++-------------+---------------+-------+--------+
+|           1 | main building |     2 |      1 |
+|           4 | building4     |     2 |      4 |
++-------------+---------------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select studid,total from mark where deptid in (select dept_id from dept where name="biology");
++--------+-------+
+| studid | total |
++--------+-------+
+|    101 |   270 |
+|    103 |   285 |
+|    102 |   280 |
++--------+-------+
+3 rows in set (0.02 sec)
+
+mysql> select * from teacher where id in(select teacher_id from dept where name="physics");
++------+------+--------+------+-------------+----------+
+| id   | name | deptid | sal  | designation | qualific |
++------+------+--------+------+-------------+----------+
+|  446 | tinu |      3 | 5000 | asst prof   | msc      |
++------+------+--------+------+-------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select count(deptid) from building where building_id="5";
++---------------+
+| count(deptid) |
++---------------+
+|             0 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select name,count(deptid) from building group by building_id;
++---------------+---------------+
+| name          | count(deptid) |
++---------------+---------------+
+| main building |             1 |
+| building2     |             1 |
+| building3     |             1 |
+| building4     |             1 |
++---------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from teacher where deptid in(select dept_id from dept where name="physics");
++------+------+--------+------+-------------+----------+
+| id   | name | deptid | sal  | designation | qualific |
++------+------+--------+------+-------------+----------+
+|  446 | tinu |      3 | 5000 | asst prof   | msc      |
++------+------+--------+------+-------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select studid,total from mark where studid in(select id from student where date_of_birth ="2002-03-01";
+ERROR 1064 (42000): Erreur de syntaxe près de '' à la ligne 1
+mysql> select studid,total from mark where studid in(select id from student where date_of_birth ="2002-03-01");
++--------+-------+
+| studid | total |
++--------+-------+
+|    104 |   287 |
++--------+-------+
+1 row in set (0.00 sec)
+
+mysql> select * from student order by date_of_birth asc;
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| id  | fname    | lname    | deptid | gender | adress     | phone     | date       | mailid             | date_of_birth |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+| 101 | arunima  | b        |      2 | f      | abc house  | 988585555 | 2021-12-01 | arunima@gmail.com  | 2000-01-01    |
+| 102 | abhirami | j        |      2 | f      | pallipuram | 989538567 | 2021-12-01 | abhirami@gmail.com | 2001-01-01    |
+| 109 | veena    | f        |      1 | f      | cherthala  | 969930008 | 2022-01-23 | veena@gmail.com    | 2001-07-20    |
+| 110 | athira   | manoj    |      1 | f      | alappuzha  | 969970008 | 2022-01-23 | athira@gmail.com   | 2001-08-20    |
+| 104 | arun     | k        |      3 | m      | Alappuzha  | 969539568 | 2022-01-13 | arun@gmail.com     | 2002-03-01    |
+| 103 | binu     | kiran    |      2 | m      | Cherthala  | 989539568 | 2021-12-01 | binu@gmail.com     | 2002-03-14    |
+| 105 | mamitha  | santhosh |      3 | f      | pallippuam | 969539508 | 2022-01-13 | mamitha@gmail.com  | 2002-04-01    |
+| 106 | minu     | biju     |      4 | f      | pallippuam | 969839508 | 2022-01-12 | minu@gmail.com     | 2002-05-02    |
+| 107 | deepak   | ramesh   |      4 | m      | cherthala  | 969830508 | 2022-01-23 | deepak@gmail.com   | 2002-05-20    |
+| 108 | deepa    | m        |      4 | f      | cherthala  | 969930508 | 2022-01-23 | deepa@gmail.com    | 2002-07-20    |
++-----+----------+----------+--------+--------+------------+-----------+------------+--------------------+---------------+
+10 rows in set (0.00 sec)
+
+mysql>

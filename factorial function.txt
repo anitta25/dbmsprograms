@@ -1,0 +1,23 @@
+declare
+  n integer :=5;
+  fact integer;
+ function factorial(n in out integer) return integer as
+ begin
+   fact :=1;
+   while n>0 loop
+   
+    fact:=fact*n;
+    n:=n-1;
+   end loop;
+   return fact;
+   end;
+   begin
+    dbms_output.put_line(factorial(n));
+    end;
+    /
+============================
+output
+============
+120
+
+Statement processed.

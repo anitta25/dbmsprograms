@@ -1,0 +1,323 @@
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database business;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use business;
+Database changed
+mysql> create table item(slno int primary key,itemno int,cost int, quantity int,date_of_purchase date);
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> insert into item values(1,201,2000,2,"2022-10-1");
+Query OK, 1 row affected (1.23 sec)
+
+mysql>
+mysql> insert into item values(2,202,2002,3,"2021-10-1");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into item values(2,03,2002,1,"2021-10-2");
+ERROR 1062 (23000): Duplicata du champ '2' pour la clef 'PRIMARY'
+mysql> insert into item values(3,03,2002,1,"2021-10-2");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> alter table item add column  itemname varchar(20);
+Query OK, 0 rows affected (0.26 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> alter table item add column companyname varchar(20);
+Query OK, 0 rows affected (0.20 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> insert into item values(4,207,3000,2,"2021-1-2");
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into item values(4,207,3000,2,"2021-1-2","alpha","tshirt");
+Query OK, 1 row affected (0.18 sec)
+
+mysql> insert into item values(5,209,7000,4,"2022-1-2","star","frock");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into item values(6,210,7000,3,"2022-2-2","diamond","shirt");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into item values(7,211,3000,1,"2022-3-2","selection","skirt");
+Query OK, 1 row affected (0.03 sec)
+
+mysql>
+mysql> insert into item values(8,212,4000,1,"2022-4-2","bluejay","frock");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into item values(9,213,10000,1,"2022-8-2","kalyan","earring");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into item values(10,214,7000,2,"2022-7-2","joy alukkas","necklace");
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from item;
++------+--------+-------+----------+------------------+-------------+-------------+
+| slno | itemno | cost  | quantity | date_of_purchase | itemname    | companyname |
++------+--------+-------+----------+------------------+-------------+-------------+
+|    1 |    201 |  2000 |        2 | 2022-10-01       | NULL        | NULL        |
+|    2 |    202 |  2002 |        3 | 2021-10-01       | NULL        | NULL        |
+|    3 |      3 |  2002 |        1 | 2021-10-02       | NULL        | NULL        |
+|    4 |    207 |  3000 |        2 | 2021-01-02       | alpha       | tshirt      |
+|    5 |    209 |  7000 |        4 | 2022-01-02       | star        | frock       |
+|    6 |    210 |  7000 |        3 | 2022-02-02       | diamond     | shirt       |
+|    7 |    211 |  3000 |        1 | 2022-03-02       | selection   | skirt       |
+|    8 |    212 |  4000 |        1 | 2022-04-02       | bluejay     | frock       |
+|    9 |    213 | 10000 |        1 | 2022-08-02       | kalyan      | earring     |
+|   10 |    214 |  7000 |        2 | 2022-07-02       | joy alukkas | necklace    |
++------+--------+-------+----------+------------------+-------------+-------------+
+10 rows in set (0.03 sec)
+
+mysql> alter table modify itemname companyname(varchar(20));
+ERROR 1064 (42000): Erreur de syntaxe près de 'itemname companyname(varchar(20))' à la ligne 1
+mysql> update table set itemname="josco",companyname="bangles" where slno=1;
+ERROR 1064 (42000): Erreur de syntaxe près de 'table set itemname="josco",companyname="bangles" where slno=1' à la ligne 1
+mysql> update item set itemname="josco",companyname="bangles" where slno=1;
+Query OK, 1 row affected (0.12 sec)
+Enregistrements correspondants: 1  Modifi+rs: 1  Warnings: 0
+
+mysql> update item set itemname="titan",companyname="watch" where slno=2;
+Query OK, 1 row affected (0.03 sec)
+Enregistrements correspondants: 1  Modifi+rs: 1  Warnings: 0
+
+mysql> update item set itemname="bheema",companyname="earring" where slno=2;
+Query OK, 1 row affected (0.03 sec)
+Enregistrements correspondants: 1  Modifi+rs: 1  Warnings: 0
+
+mysql> update item set itemname="titan",companyname="watch" where slno=3;
+Query OK, 1 row affected (0.01 sec)
+Enregistrements correspondants: 1  Modifi+rs: 1  Warnings: 0
+
+mysql> select * from item;
++------+--------+-------+----------+------------------+-------------+-------------+
+| slno | itemno | cost  | quantity | date_of_purchase | itemname    | companyname |
++------+--------+-------+----------+------------------+-------------+-------------+
+|    1 |    201 |  2000 |        2 | 2022-10-01       | josco       | bangles     |
+|    2 |    202 |  2002 |        3 | 2021-10-01       | bheema      | earring     |
+|    3 |      3 |  2002 |        1 | 2021-10-02       | titan       | watch       |
+|    4 |    207 |  3000 |        2 | 2021-01-02       | alpha       | tshirt      |
+|    5 |    209 |  7000 |        4 | 2022-01-02       | star        | frock       |
+|    6 |    210 |  7000 |        3 | 2022-02-02       | diamond     | shirt       |
+|    7 |    211 |  3000 |        1 | 2022-03-02       | selection   | skirt       |
+|    8 |    212 |  4000 |        1 | 2022-04-02       | bluejay     | frock       |
+|    9 |    213 | 10000 |        1 | 2022-08-02       | kalyan      | earring     |
+|   10 |    214 |  7000 |        2 | 2022-07-02       | joy alukkas | necklace    |
++------+--------+-------+----------+------------------+-------------+-------------+
+10 rows in set (0.00 sec)
+
+mysql> alter table item change itemname  company_name varchar(20);
+Query OK, 0 rows affected (0.06 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> alter table item change companyname  item_name varchar(20);
+Query OK, 0 rows affected (0.05 sec)
+Enregistrements: 0  Doublons: 0  Avertissements: 0
+
+mysql> select * from item;
++------+--------+-------+----------+------------------+--------------+-----------+
+| slno | itemno | cost  | quantity | date_of_purchase | company_name | item_name |
++------+--------+-------+----------+------------------+--------------+-----------+
+|    1 |    201 |  2000 |        2 | 2022-10-01       | josco        | bangles   |
+|    2 |    202 |  2002 |        3 | 2021-10-01       | bheema       | earring   |
+|    3 |      3 |  2002 |        1 | 2021-10-02       | titan        | watch     |
+|    4 |    207 |  3000 |        2 | 2021-01-02       | alpha        | tshirt    |
+|    5 |    209 |  7000 |        4 | 2022-01-02       | star         | frock     |
+|    6 |    210 |  7000 |        3 | 2022-02-02       | diamond      | shirt     |
+|    7 |    211 |  3000 |        1 | 2022-03-02       | selection    | skirt     |
+|    8 |    212 |  4000 |        1 | 2022-04-02       | bluejay      | frock     |
+|    9 |    213 | 10000 |        1 | 2022-08-02       | kalyan       | earring   |
+|   10 |    214 |  7000 |        2 | 2022-07-02       | joy alukkas  | necklace  |
++------+--------+-------+----------+------------------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> update item set itemno=203 where slno=3;
+Query OK, 1 row affected (0.02 sec)
+Enregistrements correspondants: 1  Modifi+rs: 1  Warnings: 0
+
+mysql> select * from item;
++------+--------+-------+----------+------------------+--------------+-----------+
+| slno | itemno | cost  | quantity | date_of_purchase | company_name | item_name |
++------+--------+-------+----------+------------------+--------------+-----------+
+|    1 |    201 |  2000 |        2 | 2022-10-01       | josco        | bangles   |
+|    2 |    202 |  2002 |        3 | 2021-10-01       | bheema       | earring   |
+|    3 |    203 |  2002 |        1 | 2021-10-02       | titan        | watch     |
+|    4 |    207 |  3000 |        2 | 2021-01-02       | alpha        | tshirt    |
+|    5 |    209 |  7000 |        4 | 2022-01-02       | star         | frock     |
+|    6 |    210 |  7000 |        3 | 2022-02-02       | diamond      | shirt     |
+|    7 |    211 |  3000 |        1 | 2022-03-02       | selection    | skirt     |
+|    8 |    212 |  4000 |        1 | 2022-04-02       | bluejay      | frock     |
+|    9 |    213 | 10000 |        1 | 2022-08-02       | kalyan       | earring   |
+|   10 |    214 |  7000 |        2 | 2022-07-02       | joy alukkas  | necklace  |
++------+--------+-------+----------+------------------+--------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> select max(cost) from item where name like "%j%");
+ERROR 1064 (42000): Erreur de syntaxe près de ')' à la ligne 1
+mysql> select max(cost) from item where name like "%j%";
+ERROR 1054 (42S22): Champ 'name' inconnu dans where clause
+mysql> select max(cost) from item where company_name like "%j%";
++-----------+
+| max(cost) |
++-----------+
+|      7000 |
++-----------+
+1 row in set (0.03 sec)
+
+mysql> select * from item where company_name like "%j%";
++------+--------+------+----------+------------------+--------------+-----------+
+| slno | itemno | cost | quantity | date_of_purchase | company_name | item_name |
++------+--------+------+----------+------------------+--------------+-----------+
+|    1 |    201 | 2000 |        2 | 2022-10-01       | josco        | bangles   |
+|    8 |    212 | 4000 |        1 | 2022-04-02       | bluejay      | frock     |
+|   10 |    214 | 7000 |        2 | 2022-07-02       | joy alukkas  | necklace  |
++------+--------+------+----------+------------------+--------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql>
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use business;
+Database changed
+mysql> select * from item where quantity>5 order by date_of_purchase desc;
+Empty set (0.09 sec)
+
+mysql> select slno,cost from item where item_name like "-o%";
+Empty set (0.02 sec)
+
+mysql> select slno,cost from item where company_name like "-o%";
+Empty set (0.00 sec)
+
+mysql> select slno,cost from item where company_name like "_o%";
++------+------+
+| slno | cost |
++------+------+
+|    1 | 2000 |
+|   10 | 7000 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> select slno,cost from item where item_name like "_o%";
+Empty set (0.00 sec)
+
+mysql>Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use business;
+Database changed
+mysql> select * from item where quantity>5 order by date_of_purchase desc;
+Empty set (0.09 sec)
+
+mysql> select slno,cost from item where item_name like "-o%";
+Empty set (0.02 sec)
+
+mysql> select slno,cost from item where company_name like "-o%";
+Empty set (0.00 sec)
+
+mysql> select slno,cost from item where company_name like "_o%";
++------+------+
+| slno | cost |
++------+------+
+|    1 | 2000 |
+|   10 | 7000 |
++------+------+
+2 rows in set (0.00 sec)
+
+mysql> select slno,cost from item where item_name like "_o%";
+Empty set (0.00 sec)
+
+mysql>Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1
+Server version: 5.6.17 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2014, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use university;
+Database changed
+mysql> use business;
+Database changed
+mysql> select * from business;
+ERROR 1146 (42S02): La table 'business.business' n'existe pas
+mysql> select * from  item;
++------+--------+-------+----------+------------------+--------------+-----------+
+| slno | itemno | cost  | quantity | date_of_purchase | company_name | item_name |
++------+--------+-------+----------+------------------+--------------+-----------+
+|    1 |    201 |  2000 |        2 | 2022-10-01       | josco        | bangles   |
+|    2 |    202 |  2002 |        3 | 2021-10-01       | bheema       | earring   |
+|    3 |    203 |  2002 |        1 | 2021-10-02       | titan        | watch     |
+|    4 |    207 |  3000 |        2 | 2021-01-02       | alpha        | tshirt    |
+|    5 |    209 |  7000 |        4 | 2022-01-02       | star         | frock     |
+|    6 |    210 |  7000 |        3 | 2022-02-02       | diamond      | shirt     |
+|    7 |    211 |  3000 |        1 | 2022-03-02       | selection    | skirt     |
+|    8 |    212 |  4000 |        1 | 2022-04-02       | bluejay      | frock     |
+|    9 |    213 | 10000 |        1 | 2022-08-02       | kalyan       | earring   |
+|   10 |    214 |  7000 |        2 | 2022-07-02       | joy alukkas  | necklace  |
++------+--------+-------+----------+------------------+--------------+-----------+
+10 rows in set (0.06 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_business |
++--------------------+
+| item               |
++--------------------+
+1 row in set (0.03 sec)
+
+mysql> select company_name ,min(quantity) from item groupby month(date_of_puchase);
+ERROR 1064 (42000): Erreur de syntaxe près de 'month(date_of_puchase)' à la ligne 1
+mysql> select company_name ,min(quantity) from item groupby month(date_of_purchase);
+ERROR 1064 (42000): Erreur de syntaxe près de 'month(date_of_purchase)' à la ligne 1
+mysql> select company_name ,min(quantity) from item group by month(date_of_purchase);
++--------------+---------------+
+| company_name | min(quantity) |
++--------------+---------------+
+| alpha        |             2 |
+| diamond      |             3 |
+| selection    |             1 |
+| bluejay      |             1 |
+| joy alukkas  |             2 |
+| kalyan       |             1 |
+| josco        |             1 |
++--------------+---------------+
+7 rows in set (0.05 sec)
+
+mysql>

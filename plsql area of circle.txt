@@ -1,0 +1,19 @@
+declare
+a  real:=2.3;
+area real;
+circ real;
+begin 
+area:=3.14*a*a;
+circ:=2*3.14*a;
+dbms_output.put_line('area='||area);
+dbms_output.put_line('circumference='||circ);
+end;
+/
+output
+area=16.6106
+circumference=14.444
+
+Statement processed.
+
+
+0.01 seconds
