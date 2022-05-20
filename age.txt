@@ -1,0 +1,21 @@
+create or replace function agecalc(dat in date,d out number,m out number) return number as y number;
+begin
+d:=sysdate - dat;
+y:=d/365;
+Y:=trunc(y);
+m:=(d-y*365)/30;
+M:=trunc(m);
+d:=trunc(d-y*365-m*30);
+return y;
+end;
+/
+=============================================
+DECLARE D varchar2(20):='r';
+p1 NUMBER:=09;
+p2 NUMBER:=11;
+p3 NUMBER:=1996;
+BEGIN D:=to_char(p1)||'-'||to_char(p2)||'-'||to_char(p3);
+p1:=agecalc(to_date(d,'dd-mm-yyyy'),P2,P3);
+DBMS_OUTPUT.PUT_LINE('DAYS: '||p2||' MONTHS: '||p3||' YEARS: '||P1);
+END;
+/

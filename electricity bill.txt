@@ -1,0 +1,42 @@
+
+
+CREATE OR REPLACE PROCEDURE calculatebill AS v_customer customer%rowtype;
+v_bill bills%rowtype;
+CURSOR c1 IS
+SELECT *
+FROM customer;
+rate number(3,2);
+units number;
+amount number;
+surcharge number;
+Excise number;
+Net number;  
+BEGIN
+DELETE
+FROM bills;
+
+FOR v_customer IN c1 LOOP
+SELECT decode(v_customer."CUSTOMER_TYPE",'A',1,'I',1.25,'C',1.50,'R',1.30) INTO rate
+FROM dual;
+
+SELECT decode(v_customer."METER_TYPE",'T',10,'S',5) INTO surcharge
+FROM dual;
+
+units:=v_customer."CURRENT_READING"-v_customer."PREVIOUS_READING";
+amount:=rate*units;
+surcharge:=surcharge*amount;
+Excise:=(amount +Surcharge)*30/100;
+Net:= Amount +Surcharge + Excise;
+
+INSERT INTO bills
+VALUES(v_customer."METER_NUMBER",
+       units,
+       rate,
+       amount,
+       surcharge,
+       Excise,
+       Net);
+
+END LOOP;
+END;
+/
